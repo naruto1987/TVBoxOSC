@@ -44,6 +44,14 @@ jobs:
           git checkout ${{ env.commit }}
           echo "tag=$(git log --date=format:'%Y%m%d-%H%M' --pretty=format:%cd ${{ env.commitS }} -1)" >> $GITHUB_ENV
           zip -q -x ".git/*" -r ${{ env.commitS }}-source.zip .
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/TVBoxOSC/.gradle/caches
+            ~/TVBoxOSC/.gradle/wrapper
+          key: ${{ runner.os }}-${{ matrix.userName }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.userName }}-
       - name: Release Apk Sign
         if: ${{ env.commit }}
         working-directory: TVBoxOSC
