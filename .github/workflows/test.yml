@@ -17,10 +17,10 @@ jobs:
         include:
           - userName: q215613905
             repoName: TVBoxOS
-            branchName: main
+            branchName: master
           - userName: takagen99
             repoName: Box
-            branchName: main
+            branchName: master
     steps:
       - name: Checkout
         uses: actions/checkout@v3
